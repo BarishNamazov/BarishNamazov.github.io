@@ -1,4 +1,4 @@
-body,p,td,div,input,th,li,textarea{font-size:16px;color:#000;}
+body,p,td,div,span,input,th,li,textarea{font-size:16px;color:#000;}
 
 body{background:#fff;margin:0px;padding:0px;border:0;text-align: center;}
 
@@ -21,11 +21,6 @@ h1 {
 	border: solid 1px #bbbbbb;
   padding: 10px;
   margin-bottom: 10px;
-  width: 40%;
-}
-.failSafe{
-  color: rgb(122, 5, 5);
-  display: none;
 }
 td{
   padding: 5px;
@@ -66,7 +61,4 @@ select {
 }
 .rowAdder{
   margin: 10px auto;
-}
-h3{
-  display: inline;
 }

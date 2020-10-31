@@ -33,8 +33,6 @@ function sectionAdder(dir){
   $(".moreSections").before(editedSection);
   $(".rowAdder").eq(sectionCount++).on("click", rowAdder);
   $(".sectionName").val(null);
-  $(".gradeValue").change(updateSectionGrade);
-  $(".gradeWeight").change(updateSectionGrade);  
 }
 
 

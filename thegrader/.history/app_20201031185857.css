@@ -21,11 +21,7 @@ h1 {
 	border: solid 1px #bbbbbb;
   padding: 10px;
   margin-bottom: 10px;
-  width: 40%;
-}
-.failSafe{
-  color: rgb(122, 5, 5);
-  display: none;
+  width: 30%;
 }
 td{
   padding: 5px;

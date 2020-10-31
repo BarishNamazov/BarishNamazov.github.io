@@ -33,8 +33,6 @@ function sectionAdder(dir){
   $(".moreSections").before(editedSection);
   $(".rowAdder").eq(sectionCount++).on("click", rowAdder);
   $(".sectionName").val(null);
-  $(".gradeValue").change(updateSectionGrade);
-  $(".gradeWeight").change(updateSectionGrade);  
 }
 
 
@@ -46,8 +44,7 @@ $(".sectionName").on("keypress", function(e) {
 })
 
 function updateSectionGrade() {
-  var section = $(this).parents(".gradePanel");
-  console.log(section.length);
+  var section = $(this).closest(".gradePanel");
   var grades = section.find(".gradeValue"), weights = section.find(".gradeWeight");
   var contribution = 0.0, failSafe = 0, weightSum = 0.0, sectionAverage = 0.0;
   section.find("input").attr("placeholder", "");

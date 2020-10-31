@@ -22,6 +22,8 @@ function rowAdder(){
   $(this).parents(".gradePanel").find(".moreRows").before(editedRow);
   $(".gradeValue").change(updateSectionGrade);
   $(".gradeWeight").change(updateSectionGrade);
+  $(".gradeValue").change(calculateTotalGrade);
+  $(".gradeWeight").change(calculateTotalGrade);  
 }
 $(".rowAdder").on("click", rowAdder);
 
@@ -35,8 +37,6 @@ function sectionAdder(dir){
   $(".sectionName").val(null);
   $(".gradeValue").change(updateSectionGrade);
   $(".gradeWeight").change(updateSectionGrade);  
-  $(".gradeValue").change(calculateTotalGrade);
-  $(".gradeWeight").change(calculateTotalGrade);  
 }
 
 

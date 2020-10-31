@@ -36,7 +36,9 @@ function sectionAdder(dir){
   $(".rowAdder").eq(sectionCount++).on("click", rowAdder);
   $(".sectionName").val(null);
   $(".gradeValue").change(updateSectionGrade);
-  $(".gradeWeight").change(updateSectionGrade);  
+  $(".gradeWeight").change(updateSectionGrade);
+  $(".gradeValue").change(calculateTotalGrade);
+  $(".gradeWeight").change(calculateTotalGrade);  
 }
 
 

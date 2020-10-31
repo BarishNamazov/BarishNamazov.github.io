@@ -29,7 +29,7 @@ function sectionAdder(dir){
 
   $(".rowAdder").eq(sectionCount++).on("click", rowAdder);
 
-  x.val(null);
+  $(".sectionName").val(null);
 }
 
 

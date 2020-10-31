@@ -30,7 +30,12 @@ h1 {
 td{
   padding: 5px;
 }
-
+.sectionName::placeholder{
+  opacity: 0.5;
+}
+input::placeholder{
+  opacity: 0.2;
+}
 h1{color:#003366;font-size:26px;font-weight:bold;padding:0;margin:12px 0;}
 #resulth1{background-color:#ffefe7;padding:0px 5px 0px 5px;border-top:#930 1px dotted;}
 h2{font-size:22px;font-weight:bold;color:#003366;padding:0; margin-bottom: 2px;}

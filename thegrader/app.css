@@ -1,77 +1,198 @@
-body,p,td,div,input,th,li,textarea{font-size:16px;color:#000;}
+body,
+p,
+td,
+div,
+input,
+th,
+li,
+textarea {
+    font-size: 16px;
+    color: #000;
+}
 
-body{background:#fff;margin:0px;padding:0px;border:0;text-align: center;}
+section {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+* {
+    background: #fff;
+    margin: 0px;
+    padding: 0px;
+    border: 0;
+    text-align: center;
+    box-sizing: border-box;
+}
 
 h1 {
-  text-align: center;
-  color: blue;
+    text-align: center;
+    color: blue;
 }
-.divSectionAdder{
-  margin: 10px auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+.divSectionAdder {
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.sectionName{
-  margin-right: 5px;
-  width: 260px;
+
+.sectionList {
+    list-style-type: none;
 }
-.gradePanel{
-	background:#eee;
-	border: solid 1px #bbbbbb;
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 40%;
+
+li {
+    display: inline-block;
 }
-.failSafe{
-  color: rgb(122, 5, 5);
-  display: none;
+
+input {
+    display: inline-block;
+    width: 100%;
+    font-size: 17px;
+    line-height: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    border-radius: 0;
+    outline: 0;
+    cursor: pointer;
 }
-td{
-  padding: 5px;
+
+.centerTableItems {
+    display: flex;
+    justify-content: center;
 }
-.sectionName::placeholder{
-  opacity: 0.5;
+
+.gradePanel {
+    background: #eee;
+    border: solid 1px #bbbbbb;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: auto;
 }
-input::placeholder, input::-webkit-input-placeholder{
-  opacity: 0.2;
+
+.failSafe {
+    color: rgb(122, 5, 5);
+    display: none;
 }
-h1{color:#003366;font-size:26px;font-weight:bold;padding:0;margin:12px 0;}
-#resulth1{background-color:#ffefe7;padding:0px 5px 0px 5px;border-top:#930 1px dotted;}
-h2{font-size:22px;font-weight:bold;color:#003366;padding:0; margin-bottom: 2px;}
-h3{font-size:19px;font-weight:bold;}
-hr{border:0;color:#aaa;background-color:#aaa;height:1px;}
-a{color:#069;text-decoration:underline;}
-a:hover{text-decoration:none;}
-input{padding: 5px;color:#000;}
-select{padding: 4px;color:#000;}
-option{font-size:16px;}
+
+td {
+    padding: 5px;
+}
+
+.sectionName::placeholder {
+    opacity: 0.5;
+}
+
+input::placeholder,
+input::-webkit-input-placeholder {
+    opacity: 0.2;
+}
+
+h1 {
+    color: #003366;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 0;
+    margin: 12px 0;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #003366;
+    padding: 0;
+    margin-bottom: 2px;
+}
+
+h3 {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+hr {
+    border: 0;
+    color: #aaa;
+    background-color: #aaa;
+    height: 1px;
+}
+
+a {
+    color: #069;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+input {
+    padding: 5px;
+    color: #000;
+}
+
+select {
+    padding: 4px;
+    color: #000;
+}
+
+option {
+    font-size: 16px;
+}
+
 input[type=text],
 input[type=number],
 select {
-	border: 1px solid #044284;
-	border-radius: 2px;
-	box-shadow: 1px 1px 2px #666;
-	font-size:20px;
+    border: 1px solid #044284;
+    border-radius: 2px;
+    box-shadow: 1px 1px 2px #666;
+    font-size: 20px;
 }
 
-.tableHeader{
-  text-align: center;
+.tableHeader {
+    text-align: center;
 }
-.rowHeader{
-  height: 40px;
+
+.rowHeader {
+    height: 40px;
 }
-.gradeWeight, .gradeValue{
-  text-align:center;
-  width: 70px;
+
+.gradeValue {
+    text-align: center;
+    width: 70px;
 }
-.percentIcon{
-	background: white url('media/percent.svg') right 5px center no-repeat;
-  padding-right: 22px;
+
+.gradeWeight {
+    text-align: center;
+    width: 100px;
 }
-.rowAdder{
-  margin: 10px auto;
+
+.gradeName {
+    width: 150px;
 }
-h3{
-  display: inline;
+
+.percentIcon {
+    background: white url('media/percent.svg') right 5px center no-repeat;
+    padding-right: 22px;
+}
+
+.rowAdder {
+    margin: 10px auto;
+}
+
+h3 {
+    display: inline;
+}
+
+@media screen and (max-width: 992px) {
+    section {
+        margin-top: 3rem !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .resetter {
+        margin-top: 10px !important;
+        width: 100% !important;
+    }
 }

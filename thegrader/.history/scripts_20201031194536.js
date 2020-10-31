@@ -35,8 +35,6 @@ function sectionAdder(dir){
   $(".sectionName").val(null);
   $(".gradeValue").change(updateSectionGrade);
   $(".gradeWeight").change(updateSectionGrade);  
-  $(".gradeValue").change(calculateTotalGrade);
-  $(".gradeWeight").change(calculateTotalGrade);  
 }
 
 
@@ -74,7 +72,7 @@ function updateSectionGrade() {
   section.find(".sectionAverage").text(sectionAverage.toFixed(2));
 }
 function calculateTotalGrade() {
-  var grades = $(document).find(".gradeValue"), weights = $(document).find(".gradeWeight");
+  var grades = $(document).find("gradeValue"), weights = $(document).find("gradeWeight");
   var totalGrade = 0.0, failSafe = 0, weightSum = 0.0, onlyKnownGrades = 0.0;
   for (var i = 0; i < grades.length; i++) {
     if (Number(grades[i].value) && Number(weights[i].value)) {
@@ -84,20 +82,18 @@ function calculateTotalGrade() {
       failSafe = 1;
     }
   }
-  // if (failSafe) {
-  //   $("#totalGrade").find(".failSafe").show();
-  // } else {
-  //   $("#totalGrade").find(".failSafe").hide();
-  // }
+  if (failSafe) {
+    $("#totalGrade").find(".failSafe").show();
+  } else {
+    $("#totalGrade").find(".failSafe").hide();
+  }
   for (var i = 0; i < grades.length; i++) {
     if (Number(grades[i].value) && Number(weights[i].value)) {
       onlyKnownGrades += Number(grades[i].value) * Number(weights[i].value) / weightSum;
     }
   }
-  $("#totalGrade").find(".totalGrade").text(totalGrade.toFixed(2));
-  $("#totalGrade").find(".onlyKnownGrades").text(onlyKnownGrades.toFixed(2));
+  $("#totalGrade").find(".sectionContribution").text(totalGrade.toFixed(2));
+  $("#totalGrade").find(".sectionAverage").text(onlyKnownGrades.toFixed(2));
 }
 $(".gradeValue").change(updateSectionGrade);
 $(".gradeWeight").change(updateSectionGrade);
-$(".gradeValue").change(calculateTotalGrade);
-$(".gradeWeight").change(calculateTotalGrade);

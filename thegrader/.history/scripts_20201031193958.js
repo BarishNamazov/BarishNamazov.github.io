@@ -35,8 +35,6 @@ function sectionAdder(dir){
   $(".sectionName").val(null);
   $(".gradeValue").change(updateSectionGrade);
   $(".gradeWeight").change(updateSectionGrade);  
-  $(".gradeValue").change(calculateTotalGrade);
-  $(".gradeWeight").change(calculateTotalGrade);  
 }
 
 
@@ -49,6 +47,7 @@ $(".sectionName").on("keypress", function(e) {
 
 function updateSectionGrade() {
   var section = $(this).parents(".gradePanel");
+  console.log(section.length);
   var grades = section.find(".gradeValue"), weights = section.find(".gradeWeight");
   var contribution = 0.0, failSafe = 0, weightSum = 0.0, sectionAverage = 0.0;
   section.find("input").attr("placeholder", "");
@@ -74,30 +73,7 @@ function updateSectionGrade() {
   section.find(".sectionAverage").text(sectionAverage.toFixed(2));
 }
 function calculateTotalGrade() {
-  var grades = $(document).find(".gradeValue"), weights = $(document).find(".gradeWeight");
-  var totalGrade = 0.0, failSafe = 0, weightSum = 0.0, onlyKnownGrades = 0.0;
-  for (var i = 0; i < grades.length; i++) {
-    if (Number(grades[i].value) && Number(weights[i].value)) {
-      weightSum += Number(weights[i].value);
-      totalGrade += Number(grades[i].value) * Number(weights[i].value) / 100.0;
-    } else if (isNaN(Number(grades[i].value)) || isNaN(Number(weights[i].value))) {
-      failSafe = 1;
-    }
-  }
-  // if (failSafe) {
-  //   $("#totalGrade").find(".failSafe").show();
-  // } else {
-  //   $("#totalGrade").find(".failSafe").hide();
-  // }
-  for (var i = 0; i < grades.length; i++) {
-    if (Number(grades[i].value) && Number(weights[i].value)) {
-      onlyKnownGrades += Number(grades[i].value) * Number(weights[i].value) / weightSum;
-    }
-  }
-  $("#totalGrade").find(".totalGrade").text(totalGrade.toFixed(2));
-  $("#totalGrade").find(".onlyKnownGrades").text(onlyKnownGrades.toFixed(2));
+  
 }
 $(".gradeValue").change(updateSectionGrade);
 $(".gradeWeight").change(updateSectionGrade);
-$(".gradeValue").change(calculateTotalGrade);
-$(".gradeWeight").change(calculateTotalGrade);

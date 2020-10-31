@@ -33,7 +33,7 @@ td{
 .sectionName::placeholder{
   opacity: 0.5;
 }
-input::placeholder{
+input::placeholder, input::-webkit-input-placeholder{
   opacity: 0.2;
 }
 h1{color:#003366;font-size:26px;font-weight:bold;padding:0;margin:12px 0;}

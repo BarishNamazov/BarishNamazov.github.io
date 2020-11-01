@@ -1,10 +1,12 @@
-var newRow = "<table><tbody><tr><td><input type=\"text\" class=\"gradeName\" value=\"Midterm X\" autocomplete=\"off\"></td><td><input type=\"text\" class=\"gradeValue\"></td><td><input type=\"text\" class=\"gradeWeight percentIcon\"></td></tr></tbody></table>\n ";
+var newRow = "<table class=\"centerTableItems\"><tbody><tr><td><input type=\"text\" class=\"gradeName\" value=\"Midterm X\" autocomplete=\"off\"></td><td><input type=\"text\" class=\"gradeValue\"></td><td><input type=\"text\" class=\"gradeWeight percentIcon\"></td></tr></tbody></table>\n ";
 
-var newSection = "<div class=\"col-lg-6 d-flex justify-content-center\"><table class=\"gradePanel\"> <tbody> <tr class=\"centerTableItems\"> <td> <table> <tbody> <tr class=\"rowHeader\"> <td class=\"tableHeader tableName\"><strong>Midterm</strong></td> <td class=\"tableHeader\"><strong>Grade</strong></td> <td class=\"tableHeader\"><strong>Weight</strong></td> </tr> <tr> <td><input type=\"text\" class=\"gradeName\" value=\"Midterm 1\" autocomplete=\"off\"></td> <td><input type=\"text\" class=\"gradeValue\" placeholder=\"100\"></td> <td><input type=\"text\" class=\"gradeWeight percentIcon\" placeholder=\"20\"></td> </tr> </tbody> </table> <div class=\"moreRows\"></div> <button class=\"btn btn-primary rowAdder\">add more row!</button>  <div class=\"gradeBar\"> <h3> Weighted <span class=\"nameOfSection\">Midterm</span> average: <span class=\"sectionAverage\">0</span>% <br> Contribution to the total grade: <span class=\"sectionContribution\">0</span>% <div class=\"failSafe\"> You might have some errors while entering the grades and weights as numbers. Those grades are ignored. </div> </h3> </div>  </td> </tr> </tbody> </table> </div>";
+var newSection = "<div class=\"col-lg-6 d-flex justify-content-center\"><table class=\"gradePanel\"> <tbody> <tr class=\"centerTableItems\"> <td> <table class = \"centerTableItems\"> <tbody> <tr class=\"optionalWeighting centerTableItems\"> <td> <div class=\"totalWeightIs\" style=\"display: none;\"><strong>Total weight of this section is:</strong> <input type=\"text\" style=\"display: inline; width: 65px; text-align: center;\" class=\"totalWeightIsThisInput percentIcon\"></div> <div class=\"eachWeightIs\" style=\"display: none;\"><strong>Weight of each <span class=\"nameOfSection\">Midterm</span> is: </strong> <input type=\"text\" style=\"display: inline; width: 65px; text-align: center;\" class=\"eachWeightIsThisInput percentIcon\"></div> </td> </tr> <tr class=\"rowHeader\"> <td class=\"tableHeader tableName\"><strong>Midterm</strong></td> <td class=\"tableHeader\"><strong>Grade</strong></td> <td class=\"tableHeader\"> <div class=\"btn-group dropright\"> <button type=\"button\" class=\"btn btn-secondary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" style=\"color: black; background-color: transparent;\"><strong>Weight</strong> </button> <div class=\"dropdown-menu\" style=\"\"> <div class=\"dropdown-header\">If all grades have same weight, choose one of below. </div> <button class=\"dropdown-item eachWeightIsThis\" type=\"button\">Enter weight that will be used for each grade</button> <button class=\"dropdown-item totalWeightIsThis\" type=\"button\">Enter total weight</button> <button class=\"dropdown-item backToManual\" type=\"button\">Back to manual</button> </div> </div> </td> </tr> <tr class=\"gradesRow\"> <td><input type=\"text\" class=\"gradeName\" value=\"Midterm 1\" autocomplete=\"off\"></td> <td><input type=\"text\" class=\"gradeValue\" placeholder=\"100\"></td> <td><input type=\"text\" class=\"gradeWeight percentIcon\" placeholder=\"20\"></td> </tr> </tbody> </table> <div class=\"moreRows\"></div>  <div class=\"btn-group\" style=\"display: block\"> <button type=\"button\" class=\"btn btn-primary rowAdder\">add a row</button><!-- --><button type=\"button\" class=\"btn btn-primary dropdown-toggle dropdown-toggle-split\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"></button> </button> <div class=\"dropdown-menu\"> <button class=\"dropdown-item addMoreThanOneRow\">Enter the number of rows you want to add</button> </div> </div>  <div class=\"gradeBar\"> <h3> Weighted <span class=\"nameOfSection\">Midterm</span> average: <span class=\"sectionAverage\">0</span>% <br> Contribution to the total grade: <span class=\"sectionContribution\">0</span>% <div class=\"failSafe\"> You might have some errors while entering the grades and weights as numbers. Those grades are ignored. </div> </h3> </div>  </td> </tr> </tbody> </table> </div>";
 
 $(".resetter").on("click", function() {
-    location.reload(true);
+    location.reload();
 });
+$("input").not(".gradeName").val(null);
+$(".gradeName").val("Midterm 1");
 $(".failSafe").hide();
 
 if (!String.prototype.splice) {
@@ -16,17 +18,35 @@ if (!String.prototype.splice) {
 var sectionCount = 1;
 
 function rowAdder() {
-    var idx = $(this).parents(".gradePanel").find("table").length + 1;
-    var namePanel = $(this).parents(".gradePanel").find(".tableName").text();
+    var panel = $(this).parents(".gradePanel");
+    var idx = panel.find("table").length + 1;
+    var namePanel = panel.find(".tableName").text();
     var editedRow = newRow.replace("Midterm X", namePanel + " " + idx);
-    $(this).parents(".gradePanel").find(".moreRows").before(editedRow);
-    $(".gradeValue").change(updateSectionGrade);
-    $(".gradeWeight").change(updateSectionGrade);
-    $(".gradeValue").change(calculateTotalGrade);
-    $(".gradeWeight").change(calculateTotalGrade);
+    panel.find(".moreRows").before(editedRow);
+    $(".gradeValue").on("input", updateSectionGrade);
+    $(".gradeWeight").on("input", updateSectionGrade);
+    $(".gradeValue").on("input", calculateTotalGrade);
+    $(".gradeWeight").on("input", calculateTotalGrade);
+    if (panel.find(".totalWeightIs").css("display") == "block") {
+        panel.find(".gradeWeight").val((panel.find(".totalWeightIsThisInput").val()/panel.find(".gradeWeight").length).toFixed(2));
+    }
+    if (panel.find(".eachWeightIs").css("display") == "block") {
+        panel.find(".gradeWeight").val(panel.find(".eachWeightIsThisInput").val());
+    }
 }
+function rowDeleter() {
+    console.log($(this).parents(".gradesRow"));
+    $(this).parents(".gradesRow").hide();
+}
+function rowAddClicker() {
+    var cnt = prompt("How many rows you want to add? (notice that there is one already)");
+    for (var i = 0; i < cnt; i++) {
+        $(this).parents(".gradePanel").find(".rowAdder").click();
+    }
+}
+$(".rowDeleter").on("click", rowDeleter);
 $(".rowAdder").on("click", rowAdder);
-
+$(".addMoreThanOneRow").on("click", rowAddClicker);
 function sectionAdder(dir) {
     var x = (typeof dir == "string") ? $(dir) : $(this);
     var sectionInputName = $(".sectionName").val();
@@ -35,10 +55,8 @@ function sectionAdder(dir) {
     $(".moreSections").before(editedSection);
     $(".rowAdder").eq(sectionCount++).on("click", rowAdder);
     $(".sectionName").val(null);
-    $(".gradeValue").change(updateSectionGrade);
-    $(".gradeWeight").change(updateSectionGrade);
-    $(".gradeValue").change(calculateTotalGrade);
-    $(".gradeWeight").change(calculateTotalGrade);
+    doUpdatesForNewSection();
+    $(".addMoreThanOneRow").on("click", rowAddClicker);
 }
 
 
@@ -100,11 +118,40 @@ function calculateTotalGrade() {
     $("#totalGrade").find(".totalGrade").text(totalGrade.toFixed(2));
     $("#totalGrade").find(".onlyKnownGrades").text(onlyKnownGrades.toFixed(2));
 }
-$(".gradeValue").change(updateSectionGrade);
-$(".gradeWeight").change(updateSectionGrade);
-$(".gradeValue").change(calculateTotalGrade);
-$(".gradeWeight").change(calculateTotalGrade);
 
-$(".eachWeightIsThis").on("click", function() {
-
-});
+function doUpdatesForNewSection() {
+    // $(".addMoreThanOneRow").on("click", rowAddClicker);
+    $(".gradeValue").on("input", updateSectionGrade);
+    $(".gradeWeight").on("input", updateSectionGrade);
+    $(".gradeValue").on("input", calculateTotalGrade);
+    $(".gradeWeight").on("input", calculateTotalGrade);
+    $(".eachWeightIsThis").on("click", function() {
+        $(this).parents(".gradePanel").find(".totalWeightIs").hide();
+        $(this).parents(".gradePanel").find(".eachWeightIs").show();
+        $(this).parents(".gradePanel").find(".gradeWeight").val(null);
+        $(this).parents(".gradePanel").find(".totalWeightIsThisInput").val(null);
+        $(this).parents(".gradePanel").find(".eachWeightIsThisInput").val(null);
+    });
+    
+    $(".totalWeightIsThis").on("click", function() {
+        $(this).parents(".gradePanel").find(".totalWeightIs").show();
+        $(this).parents(".gradePanel").find(".eachWeightIs").hide();
+        $(this).parents(".gradePanel").find(".gradeWeight").val(null);
+        $(this).parents(".gradePanel").find(".totalWeightIsThisInput").val(null);
+        $(this).parents(".gradePanel").find(".eachWeightIsThisInput").val(null);
+    });
+    $(".backToManual").on("click", function() {
+        $(this).parents(".gradePanel").find(".totalWeightIs").hide();
+        $(this).parents(".gradePanel").find(".eachWeightIs").hide();
+        $(this).parents(".gradePanel").find(".gradeWeight").val(null);
+        $(this).parents(".gradePanel").find(".totalWeightIsThisInput").val(null);
+        $(this).parents(".gradePanel").find(".eachWeightIsThisInput").val(null);
+    });
+    $(".totalWeightIsThisInput").on("input", function() {
+        $(this).parents(".gradePanel").find(".gradeWeight").val(($(this).val()/$(this).parents(".gradePanel").find(".gradeWeight").length).toFixed(2));
+    });
+    $(".eachWeightIsThisInput").on("input", function() {
+        $(this).parents(".gradePanel").find(".gradeWeight").val($(this).val());
+    });
+}
+doUpdatesForNewSection();

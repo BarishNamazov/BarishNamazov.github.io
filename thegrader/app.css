@@ -18,8 +18,8 @@ section {
 
 * {
     background: #fff;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     border: 0;
     text-align: center;
     box-sizing: border-box;
@@ -180,6 +180,8 @@ select {
 h3 {
     display: inline;
 }
+
+
 
 @media screen and (max-width: 992px) {
     section {

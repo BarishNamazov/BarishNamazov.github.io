@@ -28,7 +28,7 @@ function rowAdder() {
     $(".gradeValue").on("input", calculateTotalGrade);
     $(".gradeWeight").on("input", calculateTotalGrade);
     if (panel.find(".totalWeightIs").css("display") == "block") {
-        panel.find(".gradeWeight").val((panel.find(".totalWeightIsThisInput").val()/panel.find(".gradeWeight").length).toFixed(2));
+        panel.find(".gradeWeight").val((panel.find(".totalWeightIsThisInput").val()/panel.find(".gradeWeight:visible").length).toFixed(2));
     }
     if (panel.find(".eachWeightIs").css("display") == "block") {
         panel.find(".gradeWeight").val(panel.find(".eachWeightIsThisInput").val());
